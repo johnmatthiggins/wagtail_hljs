@@ -1,6 +1,9 @@
 [project]
 name = "wagtailcodeblock"
-authors = [{name = "Tim Allen", email = "tallen@wharton.upenn.edu"},]
+authors = [
+    {name = "John Higgins", email = "johnmatthiggins@gmail.com"},
+    {name = "Tim Allen", email = "tallen@wharton.upenn.edu"},
+]
 description = "Wagtail Code Block provides PrismJS syntax highlighting in Wagtail."
 dynamic = ["version"]
 readme = "README.md"

@@ -1,61 +1,51 @@
 {% load static wagtailcodeblock_tags %}
 {% spaceless %}
-    {% load_prism_css %}
-    {% for key, val in self.items %}
-        {% if key == "language" %}
-            <script>
-            /* This is ugly, but to ensure we only create this function once, and only call
-            each JS library once, we need to check here in case there are multiple Wagtail
-            blocks on this page. This will ensure we only load the minimum payload. */
-            if(typeof loadPrismLanguage != 'function') {
-                window.loadPrismLanguage = function(language) {
-                    var libraries = [
-                        {
-                            "id": "code-block-prismjs",
-                            "url": "//cdnjs.cloudflare.com/ajax/libs/prism/{% prism_version %}/prism.min.js"
-                        }
+        {% load_hljs_theme %}
+        <script>
+        if (typeof loadHighlightJS !== 'function') {
+            window.loadHighlightJS = (language) => {
+                window.loadedLibraries = new Set();
+                const libraryLink = document.createElement('script');
+                libraryLink.setAttribute('src', '{% hljs_prefix %}/{% hljs_version %}/highlight.min.js');
+                libraryLink.addEventListener('load', () => {
+                    const languageLibraries = [
                         /*Since there is no html.min.js this check makes sure we
                         bypass the loading of the script when syntax is set to HTML */
                         {% if val != "html" %}
-                            ,
-                            {
-                                "id": "code-block-prismjs-" + language,
-                                "url": "//cdnjs.cloudflare.com/ajax/libs/prism/{% prism_version %}/components/prism-" + language + ".min.js"
-                            }
+                            { "url": "{% hljs_prefix %}/{% hljs_version %}/languages/" + language + ".min.js" }
                         {% endif %}
-                        {% line_numbers_js %}
-                        {% toolbar_js %}
-                        {% copy_to_clipboard_js %}
                     ];
+                    const scripts = [];
+                    window.codeScriptsLoaded = false;
 
-                    for(const library of libraries) {
-                        if(document.getElementById(library["id"]) == null) {
-                            var s = document.createElement("script");
+                    for (const library of languageLibraries) {
+                        if (document.getElementById(library["id"]) === null) {
+                            let s = document.createElement("script");
                             s.id = library["id"];
                             s.type = "text/javascript";
                             s.src = library["url"];
                             s.async = false;
-                            document.body.appendChild(s);
+                            s.addEventListener('load', (event) => {
+                                const src = event.target.getAttribute('src');
+                                loadedLibraries.add(src);
+
+                                if (loadedLibraries.size === languageLibraries.length) {
+                                    console.log('loaded highlight.js...');
+                                    hljs.highlightAll();
+                                }
+                            });
+                            scripts.push(s);
                         }
                     }
-                };
-            }
+                    document.head.append(...scripts);
+                });
+                document.head.appendChild(libraryLink);
+            };
+        }
 
-            loadPrismLanguage('{{ val }}');
-
-            language_class_name = 'language-{{ val }}';
-            </script>
-        {% endif %}
-        {% if key == "code" %}
-            <pre class="line-numbers">
-                <code id="target-element-current">{{ val }}</code>
-            </pre>
-            <script>
-                var block_num = (typeof block_num === 'undefined') ? 0 : block_num;
-                block_num++;
-                document.getElementById('target-element-current').className = language_class_name;
-                document.getElementById('target-element-current').id = 'target-element-' + block_num;
-            </script>
-        {% endif %}
-    {% endfor %}
+        loadHighlightJS('{{ self.language }}');
+        </script>
+        <pre class="line-numbers">
+            <code class="language-{{ self.language }}">{{ self.code }}</code>
+        </pre>
 {% endspaceless %}

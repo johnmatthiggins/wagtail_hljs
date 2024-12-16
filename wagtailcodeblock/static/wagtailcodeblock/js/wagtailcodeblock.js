@@ -8,24 +8,63 @@ class CodeBlockDefinition extends window.wagtailStreamField.blocks
             initialError,
         );
 
-        var languageField = $(document).find('#' + prefix + '-language');
-        var codeField = $(document).find('#' + prefix + '-code');
-        var targetField = $(document).find('#' + prefix + '-target');
-
-        function updateLanguage() {
-            var languageCode = languageField.val();
-            targetField.removeClass().addClass('language-' + languageCode);
-            prismRepaint();
+        function buildCDNLink(language) {
+            // const version = "11.9.0";
+            return `//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/${language}.min.js`;
         }
 
-        function prismRepaint() {
-            Prism.highlightElement(targetField[0]);
+        let languageField = $(document).find('#' + prefix + '-language');
+        let codeField = $(document).find('#' + prefix + '-code');
+        let targetField = $(document).find('#' + prefix + '-target');
+
+        function updateLanguage() {
+            let languageCode = languageField.val();
+            targetField.removeClass().addClass('language-' + languageCode);
+            hljsRepaint(languageCode);
+        }
+
+        function hljsRepaint(languageCode) {
+            // if it already exists don't try to add it...
+            if (!document.head.querySelector(`script[src$="${languageCode}.min.js"]`)) {
+                const scriptElement = document.createElement('script');
+                scriptElement.setAttribute('src', buildCDNLink(languageCode));
+                scriptElement.addEventListener('load', () => {
+                    document
+                        .querySelectorAll('code[data-highlighted="yes"]')
+                        .forEach((element) => {
+                            element.removeAttribute('data-highlighted');
+                        });
+                    hljs.highlightAll();
+                });
+                document.head.appendChild(scriptElement);
+            } else {
+                document
+                    .querySelectorAll('code[data-highlighted="yes"]')
+                    .forEach((element) => {
+                        element.removeAttribute('data-highlighted');
+                    });
+                hljs.highlightAll();
+            }
         }
 
         function populateTargetCode() {
-            var codeText = codeField.val();
-            targetField.text(codeText);
-            prismRepaint(targetField);
+            if (!document.head.querySelector('highlight.min.js')) {
+                const scriptElement = document.createElement('script');
+                scriptElement.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js');
+                scriptElement.addEventListener('load', () => {
+                    hljs.highlightAll();
+                    let codeText = codeField.val();
+                    let languageCode = languageField.val();
+                    targetField.text(codeText);
+                    hljsRepaint(languageCode);
+                });
+                document.head.appendChild(scriptElement);
+            } else {
+                let codeText = codeField.val();
+                let languageCode = languageField.val();
+                targetField.text(codeText);
+                hljsRepaint(languageCode);
+            }
         }
 
         updateLanguage();

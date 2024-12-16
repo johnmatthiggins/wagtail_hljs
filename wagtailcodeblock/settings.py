@@ -1,5 +1,7 @@
 from django.conf import settings
 
+HLJS_PREFIX = "//cdnjs.cloudflare.com/ajax/libs/highlight.js"
+HLJS_VERSION = "11.9.0"
 PRISM_PREFIX = "//cdnjs.cloudflare.com/ajax/libs/prism/"
 PRISM_VERSION = "1.29.0"
 

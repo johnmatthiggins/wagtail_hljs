@@ -3,7 +3,7 @@ from django.utils.html import format_html_join
 
 from wagtail import hooks
 
-from .settings import get_theme, PRISM_VERSION, PRISM_PREFIX
+from .settings import get_theme, HLJS_VERSION, HLJS_PREFIX, PRISM_VERSION, PRISM_PREFIX
 
 
 @hooks.register("insert_global_admin_css")
@@ -11,12 +11,13 @@ def global_admin_css():
     THEME = get_theme()
 
     if THEME:
-        prism_theme = f"-{THEME}"
+        hljs_theme = f"{THEME}"
     else:
-        prism_theme = ""
+        hljs_theme = ""
 
     extra_css = [
-        f"{PRISM_PREFIX}{PRISM_VERSION}/themes/prism{prism_theme}.min.css",
+        # f"{HLJS_PREFIX}/{HLJS_VERSION}/themes/prism{hljs_theme}.min.css",
+        f"https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/{hljs_theme}.min.css",
         static("wagtailcodeblock/css/wagtail-code-block.min.css"),
     ]
 
