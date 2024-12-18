@@ -48,27 +48,15 @@ class CodeBlockDefinition extends window.wagtailStreamField.blocks
         }
 
         function populateTargetCode() {
-            if (!document.head.querySelector('highlight.min.js')) {
-                const scriptElement = document.createElement('script');
-                scriptElement.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js');
-                scriptElement.addEventListener('load', () => {
-                    hljs.highlightAll();
-                    let codeText = codeField.val();
-                    let languageCode = languageField.val();
-                    targetField.text(codeText);
-                    hljsRepaint(languageCode);
-                });
-                document.head.appendChild(scriptElement);
-            } else {
-                let codeText = codeField.val();
-                let languageCode = languageField.val();
-                targetField.text(codeText);
-                hljsRepaint(languageCode);
-            }
+            let codeText = codeField.val();
+            let languageCode = languageField.val();
+            targetField.text(codeText);
+            hljsRepaint(languageCode);
         }
 
         updateLanguage();
         populateTargetCode();
+
         languageField.on('change', updateLanguage);
         codeField.on('keyup', populateTargetCode);
 
