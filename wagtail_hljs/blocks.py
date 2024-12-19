@@ -88,7 +88,7 @@ class CodeBlockAdapter(StructBlockAdapter):
     def media(self):
         structblock_media = super().media
         return Media(
-            js=structblock_media._js + ["wagtail_hljs/js/wagtail_hljs.js"],
+            js=structblock_media._js + ["wagtail_hljs/js/wagtailhljsblock.js"],
             css=structblock_media._css,
         )
 
