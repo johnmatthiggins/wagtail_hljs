@@ -32,21 +32,25 @@ def test_page(db):
 
     test_page, created = CodeBlockPage.objects.get_or_create(
         # Required Wagtail Page fields
-        title="TEST Wagtail Code Block Page",
-        slug="wagtail-code-block",
+        title="TEST Wagtail Highlight.js Page",
+        slug="wagtail-hljs",
         content_type=page_content_type,
         path="00010002",
         depth=2,
         numchild=0,
-        url_path="/wagtail-code-block/",
+        url_path="/wagtail-hljs/",
         # Wagtail Code Block test fields
-        body=dumps([{
-            "type": "code",
-            "value": {
-                "language": "python",
-                "code": "print([x for x in range(1, 5)])",
-            },
-        }]),
+        body=dumps(
+            [
+                {
+                    "type": "code",
+                    "value": {
+                        "language": "python",
+                        "code": "print([x for x in range(1, 5)])",
+                    },
+                }
+            ]
+        ),
     )
 
     return test_page
