@@ -45,9 +45,9 @@ dev = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/johnmatthiggins/wagtail_hjls"
-"Repository" = "https://github.com/johnmatthiggins/wagtail_hjls"
-"Documentation" = "https://github.com/johnmatthiggins/wagtail_hjls"
+"Homepage" = "https://github.com/johnmatthiggins/wagtail_hljs"
+"Repository" = "https://github.com/johnmatthiggins/wagtail_hljs"
+"Documentation" = "https://github.com/johnmatthiggins/wagtail_hljs"
 
 [build-system]
 requires = ["setuptools>=67", "setuptools_scm>=7", "wheel"]
@@ -63,4 +63,4 @@ DJANGO_SETTINGS_MODULE = "tests.settings"
 
 [tool.coverage.run]
 plugins = ["django_coverage_plugin"]
-include = ["wagtail_hjls/*"]
+include = ["wagtail_hljs/*"]

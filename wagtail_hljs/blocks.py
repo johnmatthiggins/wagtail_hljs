@@ -76,7 +76,7 @@ class CodeBlock(StructBlock):
 
     class Meta:
         icon = "code"
-        template = "wagtail_hjls/code_block.html"
+        template = "wagtail_hljs/code_block.html"
         form_classname = "code-block struct-block"
         form_template = "wagtail_hljs/code_block_form.html"
 
