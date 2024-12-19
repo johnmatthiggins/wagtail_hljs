@@ -1,15 +1,8 @@
-# Wagtail Code Block
+# Wagtail Highlight.js
 
-Wagtail Code Block is a syntax highlighter block for source code for the Wagtail CMS. It features real-time highlighting in the Wagtail editor, the front end, line numbering, and support for PrismJS themes.
+Wagtail Code Block is a syntax highlighter block for source code for the Wagtail CMS. It features real-time highlighting in the Wagtail editor, the front end, and support for [Highlight.js themes](https://highlightjs.org/demo).
 
-It uses the [PrismJS](http://prismjs.com/) library both in Wagtail Admin and the website.
-
-## Join the Community at Wagtail Space!
-
-We'll be at Wagtail Space US this year! The Call for Participation and Registration for both Wagtail Space 2024 events is open. We would love to have you give a talk, or just us as an attendee in June.
-
-* [Wagtail Space NL](https://nl.wagtail.space/), Arnhem, The Netherlands. 2024-06-14
-* [Wagtail Space US](https://us.wagtail.space/), Philadelphia, PA. 2024-06-20 to 2024-06-22
+It uses the [Highlight.js](https://highlightjs.org/) library both in Wagtail Admin and the website.
 
 ## Example Usage
 
@@ -91,6 +84,7 @@ WAGTAIL_CODE_BLOCK_COPY_TO_CLIPBOARD = False
 
 ### Themes
 
+TODO: rewrite themes section
 Wagtail Code Block defaults to the PrismJS "Coy" theme, which looks good with Wagtail's CMS editor design. You can choose a different theme by configuring `WAGTAIL_CODE_BLOCK_THEME` in your Django settings. PrismJS provides several themes:
 
 * **None**: <a href="http://prismjs.com/index.html?theme=prism" target="_blank">Default</a>
@@ -323,22 +317,14 @@ WAGTAIL_CODE_BLOCK_LANGUAGES = (
 )
 ```
 
-# What's With the Versioning?
-
-Our version numbers are based on the underlying version of PrismJS we use. For example, if we are using PrismJS `1.28.0`, our versions will be named `1.28.0.X`.
-
 # Running the Test Suite
 
 Clone the repository, create a `venv`, `pip install -e .[dev]` and run `pytest`.
 
 # Release Notes & Contributors
 
-* Thank you to our [wonderful contributors](https://github.com/FlipperPA/wagtailcodeblock/graphs/contributors)!
-* Release notes are [available on GitHub](https://github.com/FlipperPA/wagtailcodeblock/releases).
+* This is fork of [wagtailcodeblock](https://github.com/FlipperPA/wagtailcodeblock/).
 
 # Project Maintainers
 
-* Timothy Allen (https://github.com/FlipperPA)
-* Milton Lenis (https://github.com/MiltonLn)
-
-This package was created by the staff of [Wharton Research Data Services](https://wrds.wharton.upenn.edu/). We are thrilled that [The Wharton School](https://www.wharton.upenn.edu/) allows us a certain amount of time to contribute to open-source projects. We add features as they are necessary for our projects, and try to keep up with Issues and Pull Requests as best we can. Due to constraints of time (our full time jobs!), Feature Requests without a Pull Request may not be implemented, but we are always open to new ideas and grateful for contributions and our users.
+* John Higgins (https://github.com/johnmatthiggins)
