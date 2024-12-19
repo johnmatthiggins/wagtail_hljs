@@ -3,9 +3,9 @@ build/*
 dist/*
 htmlcov/*
 venv/*
-wagtailcodeblock.egg-info/*
+wagtail_hljs.egg-info/*
 test_db.sqlite3
-wagtailcodeblock/_version.py
+wagtail_hljs/_version.py
 
 # manage.py, always default to dev settings
 manage.py

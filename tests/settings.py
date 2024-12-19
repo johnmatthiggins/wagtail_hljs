@@ -34,7 +34,7 @@ INSTALLED_APPS = settings.INSTALLED_APPS + [
     "tests",
     "wagtail.images",
     "wagtail.users",
-    "wagtailcodeblock",
+    "wagtail_hljs",
     "modelcluster",
     "taggit",
 ]
