@@ -1,5 +1,5 @@
 [project]
-name = "wagtail_hljs"
+name = "wagtailhljs"
 authors = [
     {name = "John Higgins", email = "johnmatthiggins@gmail.com"},
     {name = "Tim Allen", email = "tallen@wharton.upenn.edu"},
