@@ -24,8 +24,8 @@ def load_hljs_theme():
     theme = get_theme()
 
     if theme:
-        css_link = f"""<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/{theme}.min.css">"""
+        css_link = f"""<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/{HLJS_VERSION}/styles/{theme}.min.css">"""
     else:
-        css_link = f"""<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">"""
+        css_link = f"""<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/{HLJS_VERSION}/styles/default.min.css">"""
 
     return mark_safe(css_link)
