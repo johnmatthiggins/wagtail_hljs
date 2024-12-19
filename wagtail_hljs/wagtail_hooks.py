@@ -17,7 +17,7 @@ def global_admin_css():
 
     extra_css = [
         f"https:{HLJS_PREFIX}/{HLJS_VERSION}/styles/{hljs_theme}.min.css",
-        static("wagtail_hljs/css/wagtail-code-block.min.css"),
+        static("wagtail_hljs/css/wagtail-hljs-block.min.css"),
     ]
 
     return format_html_join(
