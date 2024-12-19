@@ -3,6 +3,7 @@ from django.conf import settings
 HLJS_PREFIX = "//cdnjs.cloudflare.com/ajax/libs/highlight.js"
 HLJS_VERSION = "11.9.0"
 
+
 def get_language_choices():
     """
     Default list of language choices, if not overridden by Django.

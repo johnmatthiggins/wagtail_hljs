@@ -64,4 +64,4 @@ class CodeBlockDefinition extends window.wagtailStreamField.blocks
     }
 }
 
-window.telepath.register('wagtailcodeblock.blocks.CodeBlock', CodeBlockDefinition);
+window.telepath.register('wagtail_hljs.blocks.CodeBlock', CodeBlockDefinition);
