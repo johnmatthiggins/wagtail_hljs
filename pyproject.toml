@@ -41,6 +41,7 @@ pytest-coverage = "^0.0"
 pytest-django = "^4.9.0"
 django-coverage-plugin = "^3.1.0"
 python-semantic-release = "^9.15.2"
+flake8 = "^7.1.1"
 
 [build-system]
 requires = ["poetry-core"]
