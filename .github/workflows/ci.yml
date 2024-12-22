@@ -12,29 +12,33 @@ jobs:
   Quality:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-python@v2
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v4
       with:
         python-version: 3.11
     - name: Install Python Poetry
-      uses: abatilo/actions-poetry@v2.1.0
+      uses: abatilo/actions-poetry@v2
       with:
-        poetry-version: 1.1.2
-    - name: Configure poetry
-      shell: bash
-      run: python -m poetry config virtualenvs.in-project true
+        poetry-version: 1.8.3
+    - name: Setup a local virtual environment (if no poetry.toml file)
+      run: |
+        poetry config virtualenvs.create true --local
+        poetry config virtualenvs.in-project true --local
+    # - name: Configure poetry
+    #   shell: bash
+    #   run: poetry config virtualenvs.in-project true
     - name: View poetry version
       run: poetry --version
     - name: Install dependencies
       run: |
-        python -m poetry install
+        poetry install
     - name: Lint with ruff
       run: |
         # stop the build if there are Python syntax errors or undefined names
-        python -m poetry run ruff check .
+        poetry run ruff check .
     - name: Test with pytest
       run: |
-        python -m poetry run python -m pytest -v tests
+        poetry run python -m pytest -v tests
 
   Release:
     needs: Quality
