@@ -1,15 +1,14 @@
-[project]
-name = "wagtail_hljs"
+[tool.poetry]
+name = "wagtail-hljs"
+version = "0.1.0"
+description = "StreamField code blocks for the Wagtail CMS with real-time Highlight.js Syntax Highlighting."
 authors = [
-    {name = "John Higgins", email = "johnmatthiggins@gmail.com"},
-    {name = "Tim Allen", email = "tallen@wharton.upenn.edu"},
+    "John Higgins <johnmatthiggins@gmail.com>",
+    "Tim Allen <tallen@wharton.upenn.edu>",
 ]
-description = "Wagtail Highlight.js provides syntax highlighting in Wagtail with Highlight.js."
-dynamic = ["version"]
+license = "BSD-3-Clause"
 readme = "README.md"
-requires-python = ">=3.7"
 keywords = ["wagtail", "cms", "contact", "syntax", "code", "highlighting", "highlighter", "highlight.js"]
-license = {text = "BSD-3-Clause"}
 classifiers = [
     # "Development Status :: 5 - Production/Stable",
     "Environment :: Web Environment",
@@ -31,30 +30,25 @@ classifiers = [
     "Topic :: Internet :: WWW/HTTP",
     "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
 ]
-dependencies = [
-    "wagtail>=4",
-]
 
-[project.optional-dependencies]
-dev = [
-  "django-coverage-plugin",
-  "ipython",
-  "ruff",
-  "pytest-coverage",
-  "pytest-django",
-]
+[tool.poetry.dependencies]
+python = "^3.11"
+wagtail = ">=4"
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.8.4"
+pytest-coverage = "^0.0"
+pytest-django = "^4.9.0"
+django-coverage-plugin = "^3.1.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
 
 [project.urls]
 "Homepage" = "https://github.com/johnmatthiggins/wagtail_hljs"
 "Repository" = "https://github.com/johnmatthiggins/wagtail_hljs"
 "Documentation" = "https://github.com/johnmatthiggins/wagtail_hljs"
-
-[build-system]
-requires = ["setuptools>=67", "setuptools_scm>=7", "wheel"]
-build-backend = "setuptools.build_meta"
-
-[tool.setuptools_scm]
-write_to = "wagtail_hljs/_version.py"
 
 [tool.pytest.ini_options]
 addopts = "--cov --cov-report=html"
@@ -64,3 +58,13 @@ DJANGO_SETTINGS_MODULE = "tests.settings"
 [tool.coverage.run]
 plugins = ["django_coverage_plugin"]
 include = ["wagtail_hljs/*"]
+
+[tool.semantic_release]
+version_variable = [
+    "wagtail_hljs/__init__.py:__version__",
+    "pyproject.toml:version"
+]
+branch = "main"
+upload_to_pypi = false
+upload_to_release = true
+build_command = "pip install poetry && poetry build"
