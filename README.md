@@ -6,7 +6,7 @@ It uses the [Highlight.js](https://highlightjs.org/) library both in Wagtail Adm
 
 ## Example Usage
 
-First, add `wagtailcodeblock` to your `INSTALLED_APPS` in Django's settings. Here's a bare bones example:
+First, add `wagtail_hljs` to your `INSTALLED_APPS` in Django's settings. Here's a bare bones example:
 
 ```python
 from wagtail.blocks import TextBlock
@@ -14,7 +14,7 @@ from wagtail.fields import StreamField
 from wagtail.models import Page
 from wagtail.admin.panels import FieldPanel
 
-from wagtailcodeblock.blocks import CodeBlock
+from wagtail_hljs.blocks import CodeBlock
 
 
 class HomePage(Page):
@@ -28,7 +28,7 @@ class HomePage(Page):
     ]
 ```
 
-You can also force it to use a single language or set a default language by providing a language code which must be included in your `WAGTAIL_CODE_BLOCK_LANGUAGES` setting:
+You can also force it to use a single language or set a default language by providing a language code which must be included in your `WAGTAIL_HLJS_LANGUAGES` setting:
 
 ```python
 bash_code = CodeBlock(label='Bash Code', language='bash')
@@ -37,73 +37,50 @@ any_code = CodeBlock(label='Any code', default_language='python')
 
 ## Screenshot of the CMS Editor Interface
 
-![Admin in Action](https://raw.githubusercontent.com/FlipperPA/wagtailcodeblock/main/docs/img/screenshot-editor.png)
+![Admin in Action](https://raw.githubusercontent.com/johnmatthiggins/wagtail_hljs/main/docs/img/screenshot-editor.png)
 
 ## Installation & Setup
 
-To install Wagtail Code Block run:
+To install Wagtail Highlight.js run:
 
 ```bash
 # Wagtail 4.0 and greater
-pip install wagtailcodeblock
-
-# Wagtail 3.x
-pip install wagtailcodeblock==1.28.0.0
-
-# Wagtail 2.x
-pip install wagtailcodeblock==1.25.0.2
+pip install wagtail-hljs
 ```
 
-And add `wagtailcodeblock` to your `INSTALLED_APPS` setting:
+And add `wagtail_hljs` to your `INSTALLED_APPS` setting:
 
 ```python
 INSTALLED_APPS = [
     ...
-    'wagtailcodeblock',
+    'wagtail_hljs',
     ...
 ]
 ```
 
 ## Django Settings
 
-### Line Numbers
-
-Line numbers are enabled by default, but can be disabled in Django's settings:
-
-```python
-WAGTAIL_CODE_BLOCK_LINE_NUMBERS = False
-```
-
-### Copy to clipboard
-
-Copy to clipboard is enabled by default, but can be disabled in Django's settings:
-
-```python
-WAGTAIL_CODE_BLOCK_COPY_TO_CLIPBOARD = False
-```
-
 ### Themes
 
-TODO: rewrite themes section
-Wagtail Code Block defaults to the PrismJS "Coy" theme, which looks good with Wagtail's CMS editor design. You can choose a different theme by configuring `WAGTAIL_CODE_BLOCK_THEME` in your Django settings. PrismJS provides several themes:
+Wagtail Highlight.js supports all themes that Highlight.js supports. Here are a few of them:
 
-* **None**: <a href="http://prismjs.com/index.html?theme=prism" target="_blank">Default</a>
-* **'coy'**: <a href="http://prismjs.com/index.html?theme=prism-coy" target="_blank">Coy</a>
-* **'dark'**: <a href="http://prismjs.com/index.html?theme=prism-dark" target="_blank">Dark</a>
-* **'funky'**: <a href="http://prismjs.com/index.html?theme=prism-funky" target="_blank">Funky</a>
-* **'okaidia'**: <a href="http://prismjs.com/index.html?theme=prism-okaidia" target="_blank">Okaidia</a>
-* **'solarizedlight'**: <a href="http://prismjs.com/index.html?theme=prism-solarizedlight" target="_blank">Solarized Light</a>
-* **'twilight'**: <a href="http://prismjs.com/index.html?theme=prism-twilight" target="_blank">Twilight</a>
+* **None**: <a href="https://highlightjs.org/demo#lang=&v=1&theme=base16-darcula&code=ZGVmIG1haW4oKToKCXByaW50KCdoZWxsbyB3b3JsZCcpCgppZiBfX25hbWVfXyA9PSAnX1%2FEMV9fJzoKCcY7" target="_blank">Default</a>
+* **'atom-one-dark'**: <a href="https://highlightjs.org/demo#lang=&v=1&theme=atom-one-dark&code=ZGVmIG1haW4oKToKCXByaW50KCdoZWxsbyB3b3JsZCcpCgppZiBfX25hbWVfXyA9PSAnX1%2FEMV9fJzoKCcY7" target="_blank">Atom One Dark</a>
+* **'base16/darcula'**: <a href="https://highlightjs.org/demo#lang=&v=1&theme=base16-darcula&code=ZGVmIG1haW4oKToKCXByaW50KCdoZWxsbyB3b3JsZCcpCgppZiBfX25hbWVfXyA9PSAnX1%2FEMV9fJzoKCcY7" target="_blank">Base 16 Darcula</a>
+* **'nord'**: <a href="https://highlightjs.org/demo#lang=&v=1&theme=nord&code=ZGVmIG1haW4oKToKCXByaW50KCdoZWxsbyB3b3JsZCcpCgppZiBfX25hbWVfXyA9PSAnX1%2FEMV9fJzoKCcY7" target="_blank">Nord</a>
+* **'srcery'**: <a href="https://highlightjs.org/demo#lang=&v=1&theme=srcery&code=ZGVmIG1haW4oKToKCXByaW50KCdoZWxsbyB3b3JsZCcpCgppZiBfX25hbWVfXyA9PSAnX1%2FEMV9fJzoKCcY7" target="_blank">Srcery</a>
+* **'xt256'**: <a href="https://highlightjs.org/demo#lang=&v=1&theme=xt256&code=ZGVmIG1haW4oKToKCXByaW50KCdoZWxsbyB3b3JsZCcpCgppZiBfX25hbWVfXyA9PSAnX1%2FEMV9fJzoKCcY7" target="_blank">XT256</a>
+* **'night-owl'**: <a href="https://highlightjs.org/demo#lang=&v=1&theme=night-owl&code=ZGVmIG1haW4oKToKCXByaW50KCdoZWxsbyB3b3JsZCcpCgppZiBfX25hbWVfXyA9PSAnX1%2FEMV9fJzoKCcY7" target="_blank">Night Owl</a>
 
-For example, in you want to use the Solarized Light theme: `WAGTAIL_CODE_BLOCK_THEME = 'solarizedlight'`
-If you want to use the Default theme: `WAGTAIL_CODE_BLOCK_THEME = None`
+For example, in you want to use the Night Owl theme: `WAGTAIL_HLJS_THEME = 'night-owl'`
+If you want to use the Default theme: `WAGTAIL_HLJS_THEME = None`
 
 ### Languages Available
 
-You can customize the languages available by configuring `WAGTAIL_CODE_BLOCK_LANGUAGES` in your Django settings. By default, it will be set with these languages, since most users are in the Python web development community:
+You can customize the languages available by configuring `WAGTAIL_HLJS_LANGUAGES` in your Django settings. By default, it will be set with these languages, since most users are in the Python web development community:
 
 ```python
-WAGTAIL_CODE_BLOCK_LANGUAGES = (
+WAGTAIL_HLJS_LANGUAGES = (
     ('bash', 'Bash/Shell'),
     ('css', 'CSS'),
     ('diff', 'diff'),
@@ -116,7 +93,8 @@ WAGTAIL_CODE_BLOCK_LANGUAGES = (
 )
 ```
 
-Each language in this setting is a tuple of the PrismJS code and a descriptive label. If you want use all available languages, here is a list:
+Each language in this setting is a tuple of the Highlight.js code and a descriptive label.
+If you want use all available languages, here is a list:
 
 ```python
 WAGTAIL_CODE_BLOCK_LANGUAGES = (
