@@ -39,7 +39,7 @@ def test_page(db):
         depth=2,
         numchild=0,
         url_path="/wagtail-hljs/",
-        # Wagtail Code Block test fields
+        # Wagtail Highlight.js test fields
         body=dumps(
             [
                 {

@@ -1,6 +1,8 @@
 # Wagtail Highlight.js
 
-Wagtail Code Block is a syntax highlighter block for source code for the Wagtail CMS. It features real-time highlighting in the Wagtail editor, the front end, and support for [Highlight.js themes](https://highlightjs.org/demo).
+Wagtail Highlight.js is a syntax highlighter block for source code for the Wagtail CMS.
+It features real-time highlighting in the Wagtail editor, the front end, and support for
+[Highlight.js themes](https://highlightjs.org/demo).
 
 It uses the [Highlight.js](https://highlightjs.org/) library both in Wagtail Admin and the website.
 
