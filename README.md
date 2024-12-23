@@ -74,12 +74,13 @@ Wagtail Highlight.js supports all themes that Highlight.js supports. Here are a 
 * **'xt256'**: <a href="https://highlightjs.org/demo#lang=&v=1&theme=xt256&code=ZGVmIG1haW4oKToKCXByaW50KCdoZWxsbyB3b3JsZCcpCgppZiBfX25hbWVfXyA9PSAnX1%2FEMV9fJzoKCcY7" target="_blank">XT256</a>
 * **'night-owl'**: <a href="https://highlightjs.org/demo#lang=&v=1&theme=night-owl&code=ZGVmIG1haW4oKToKCXByaW50KCdoZWxsbyB3b3JsZCcpCgppZiBfX25hbWVfXyA9PSAnX1%2FEMV9fJzoKCcY7" target="_blank">Night Owl</a>
 
-For example, in you want to use the Night Owl theme: `WAGTAIL_HLJS_THEME = 'night-owl'`
-If you want to use the Default theme: `WAGTAIL_HLJS_THEME = None`
+For example, if you want to use the Night Owl theme: `WAGTAIL_HLJS_THEME = 'night-owl'`.
+However, if you want the default theme then do this: `WAGTAIL_HLJS_THEME=None`.
 
 ### Languages Available
 
-You can customize the languages available by configuring `WAGTAIL_HLJS_LANGUAGES` in your Django settings. By default, it will be set with these languages, since most users are in the Python web development community:
+You can customize the languages available by configuring `WAGTAIL_HLJS_LANGUAGES` in your Django settings.
+By default, it will be set with these languages, since most users are in the Python web development community:
 
 ```python
 WAGTAIL_HLJS_LANGUAGES = (
