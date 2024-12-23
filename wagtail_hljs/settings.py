@@ -20,7 +20,7 @@ def get_language_choices():
         ("yaml", "YAML"),
     )
 
-    return getattr(settings, "WAGTAIL_CODE_BLOCK_LANGUAGES", DEFAULT_LANGUAGES)
+    return getattr(settings, "WAGTAIL_HLJS_LANGUAGES", DEFAULT_LANGUAGES)
 
 
 def get_theme():
@@ -28,20 +28,12 @@ def get_theme():
     Returns a default theme, if not in the proejct's settings. Default theme is 'coy'.
     """
 
-    return getattr(settings, "WAGTAIL_CODE_BLOCK_THEME", "coy")
+    return getattr(settings, "WAGTAIL_HLJS_THEME", "base16/darcula")
 
 
-def get_line_numbers():
-    """
-    Returns the line numbers setting.
-    """
-
-    return getattr(settings, "WAGTAIL_CODE_BLOCK_LINE_NUMBERS", True)
-
-
-def get_copy_to_clipboard():
-    """
-    Returns the copy to clipboard setting.
-    """
-
-    return getattr(settings, "WAGTAIL_CODE_BLOCK_COPY_TO_CLIPBOARD", True)
+# def get_copy_to_clipboard():
+#     """
+#     Returns the copy to clipboard setting.
+#     """
+#
+#     return getattr(settings, "WAGTAIL_CODE_BLOCK_COPY_TO_CLIPBOARD", True)

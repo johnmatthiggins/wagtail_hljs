@@ -68,3 +68,5 @@ bower_components/
 # Coverage
 htmlcov/
 .coverage
+
+.env

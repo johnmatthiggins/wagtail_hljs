@@ -24,9 +24,9 @@ jobs:
       run: |
         poetry config virtualenvs.create true --local
         poetry config virtualenvs.in-project true --local
-    # - name: Configure poetry
-    #   shell: bash
-    #   run: poetry config virtualenvs.in-project true
+    - name: Configure poetry
+      shell: bash
+      run: poetry config virtualenvs.in-project true
     - name: View poetry version
       run: poetry --version
     - name: Install dependencies
