@@ -1,5 +1,4 @@
 {% load wagtailadmin_tags %}
-
 <div class="{{ classname }}">
     {% if help_text %}
         <div class="object-help help">
@@ -20,7 +19,7 @@
             document is fully loaded. It isn't pretty, but it works.
             {% endcomment %}
             {% if child.block.label == "Code" %}
-                <script>
+                <script nonce="{{ request.csp_nonce }}">
                 document.addEventListener('DOMContentLoaded', function() {
                     var ta = document.getElementById('{{ child.id_for_label }}');
                     var evt = new Event('input');

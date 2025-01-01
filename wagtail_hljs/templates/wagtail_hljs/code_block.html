@@ -1,7 +1,7 @@
 {% load static wagtail_hljs_tags %}
 {% spaceless %}
-        {% load_hljs_theme %}
-        <script>
+    {% load_hljs_theme %}
+    <script nonce="{{ request.csp_nonce }}">
         if (typeof loadHighlightJS !== 'function') {
             window.loadHighlightJS = (language) => {
                 window.loadedLibraries = new Set();
