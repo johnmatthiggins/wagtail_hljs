@@ -13,3 +13,9 @@ repos:
     - id: ruff
     # Run the formatter.
     - id: ruff-format
+repos:
+  - repo: https://github.com/djlint/djLint
+    rev: v1.36.3
+    hooks:
+      - id: djlint-reformat-django
+      - id: djlint-django
