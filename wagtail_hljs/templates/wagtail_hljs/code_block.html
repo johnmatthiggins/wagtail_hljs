@@ -4,20 +4,25 @@
     <script nonce="{{ request.csp_nonce }}">
         if (typeof loadHighlightJS !== 'function') {
             window.loadedLibraries = new Set();
+            window.languageLibraries = new Set();
             window.loadHighlightJS = (language) => {
                 const libraryLink = document.createElement('script');
                 libraryLink.setAttribute('src', '{% hljs_prefix %}/{% hljs_version %}/highlight.min.js');
                 libraryLink.addEventListener('load', () => {
-                    const languageLibraries = [
+                    const url = "{% hljs_prefix %}/{% hljs_version %}/languages/" + language + ".min.js";
+                    const myLanguageLibraries = [
                         /*Since there is no html.min.js this check makes sure we
                         bypass the loading of the script when syntax is set to HTML */
                         {% if val != "html" %}
-                            { "url": "{% hljs_prefix %}/{% hljs_version %}/languages/" + language + ".min.js", "id": language }
+                            { "url": url, "id": language }
                         {% endif %}
                     ];
+                    if (!window.languageLibraries.has(url) && myLanguageLibraries.length) {
+                        window.languageLibraries.add(url);
+                    }
                     const scripts = [];
 
-                    for (const library of languageLibraries) {
+                    for (const library of myLanguageLibraries) {
                         if (!document.getElementById(library["id"])) {
                             let s = document.createElement("script");
                             s.id = library["id"];
@@ -29,7 +34,7 @@
                                 const src = event.target.getAttribute('src');
                                 loadedLibraries.add(src);
 
-                                if (loadedLibraries.size === languageLibraries.length) {
+                                if (loadedLibraries.size === window.languageLibraries.length) {
                                     console.log('loaded highlight.js...');
                                     hljs.highlightAll();
                                 }
@@ -46,10 +51,6 @@
         loadHighlightJS('{{ self.language }}');
         </script>
         <pre class="line-numbers">
-            {% if self.language == "http" %}
-            <code class="language-{{ self.language|upper }}">{{ self.code }}</code>
-            {% else %}
             <code class="language-{{ self.language }}">{{ self.code }}</code>
-            {% endif %}
         </pre>
 {% endspaceless %}
