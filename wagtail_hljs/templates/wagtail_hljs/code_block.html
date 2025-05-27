@@ -8,17 +8,19 @@
                 const libraryLink = document.createElement('script');
                 libraryLink.setAttribute('src', '{% hljs_prefix %}/{% hljs_version %}/highlight.min.js');
                 libraryLink.addEventListener('load', () => {
-                    const languageLibraries = [
-                        /*Since there is no html.min.js this check makes sure we
-                        bypass the loading of the script when syntax is set to HTML */
-                        {% if val != "html" %}
-                            { "url": "{% hljs_prefix %}/{% hljs_version %}/languages/" + language + ".min.js" }
-                        {% endif %}
-                    ];
+                    const library = { "url": "{% hljs_prefix %}/{% hljs_version %}/languages/" + language + ".min.js" };
+                    {% if val != "html" %}
+                    if (!window.languageLibraries) {
+                        window.languageLibraries = [
+                                library,
+                        ];
+                    } else {
+                        window.languageLibraries.push(library);
+                    }
+                    {% endif %}
                     const scripts = [];
-                    window.codeScriptsLoaded = false;
 
-                    for (const library of languageLibraries) {
+                    for (const library of window.languageLibraries) {
                         if (document.getElementById(library["id"]) === null) {
                             let s = document.createElement("script");
                             s.id = library["id"];
@@ -29,6 +31,7 @@
                                 const src = event.target.getAttribute('src');
                                 loadedLibraries.add(src);
 
+                                /* */
                                 if (loadedLibraries.size === languageLibraries.length) {
                                     console.log('loaded highlight.js...');
                                     hljs.highlightAll();

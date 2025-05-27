@@ -25,7 +25,7 @@ def get_language_choices():
 
 def get_theme():
     """
-    Returns a default theme, if not in the proejct's settings. Default theme is 'coy'.
+    Returns a default theme, if not in the proejct's settings. Default theme is 'darcula'.
     """
 
     return getattr(settings, "WAGTAIL_HLJS_THEME", "base16/darcula")
