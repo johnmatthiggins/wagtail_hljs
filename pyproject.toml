@@ -33,7 +33,7 @@ classifiers = [
 package-mode = true
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.10"
 wagtail = ">=4"
 
 [tool.poetry.group.dev.dependencies]
