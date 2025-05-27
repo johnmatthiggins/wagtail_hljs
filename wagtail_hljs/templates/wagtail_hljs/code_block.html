@@ -3,8 +3,8 @@
     {% load_hljs_theme %}
     <script nonce="{{ request.csp_nonce }}">
         if (typeof loadHighlightJS !== 'function') {
+            window.loadedLibraries = new Set();
             window.loadHighlightJS = (language) => {
-                window.loadedLibraries = new Set();
                 const libraryLink = document.createElement('script');
                 libraryLink.setAttribute('src', '{% hljs_prefix %}/{% hljs_version %}/highlight.min.js');
                 libraryLink.addEventListener('load', () => {
@@ -16,10 +16,9 @@
                         {% endif %}
                     ];
                     const scripts = [];
-                    window.codeScriptsLoaded = false;
 
                     for (const library of languageLibraries) {
-                        if (document.getElementById(library["id"]) === null) {
+                        if (!document.getElementById(library["id"])) {
                             let s = document.createElement("script");
                             s.id = library["id"];
                             s.type = "text/javascript";
