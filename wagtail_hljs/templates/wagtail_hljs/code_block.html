@@ -34,8 +34,8 @@
                                 const src = event.target.getAttribute('src');
                                 loadedLibraries.add(src);
 
-                                console.log(loadedLibraries.size, window.languageLibraries.length);
-                                if (loadedLibraries.size === window.languageLibraries.length) {
+                                console.log(loadedLibraries.size, window.languageLibraries.size);
+                                if (loadedLibraries.size === window.languageLibraries.size) {
                                     console.log('loaded highlight.js...');
                                     hljs.highlightAll();
                                 }
