@@ -46,6 +46,10 @@
         loadHighlightJS('{{ self.language }}');
         </script>
         <pre class="line-numbers">
+            {% if self.language == "http" %}
+            <code class="language-{{ self.language|upper }}">{{ self.code }}</code>
+            {% else %}
             <code class="language-{{ self.language }}">{{ self.code }}</code>
+            {% endif %}
         </pre>
 {% endspaceless %}
