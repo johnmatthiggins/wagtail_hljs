@@ -18,7 +18,6 @@
                     const scripts = [];
 
                     for (const library of languageLibraries) {
-                        console.log(language, window.loadedLibraries);
                         if (!document.getElementById(library["id"])) {
                             let s = document.createElement("script");
                             s.id = library["id"];
@@ -26,6 +25,7 @@
                             s.src = library["url"];
                             s.async = false;
                             s.addEventListener('load', (event) => {
+                                console.log(language, window.loadedLibraries);
                                 const src = event.target.getAttribute('src');
                                 loadedLibraries.add(src);
 
