@@ -12,7 +12,7 @@
                         /*Since there is no html.min.js this check makes sure we
                         bypass the loading of the script when syntax is set to HTML */
                         {% if val != "html" %}
-                            { "url": "{% hljs_prefix %}/{% hljs_version %}/languages/" + language + ".min.js" }
+                            { "url": "{% hljs_prefix %}/{% hljs_version %}/languages/" + language + ".min.js", "id": language }
                         {% endif %}
                     ];
                     const scripts = [];
