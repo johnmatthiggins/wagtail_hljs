@@ -4,7 +4,7 @@
     <script nonce="{{ request.csp_nonce }}">
         if (typeof loadHighlightJS !== 'function') {
             window.loadedLibraries = new Set();
-            window.languageLibraries = new Set();
+            window.languageLibraries = [];
             window.loadHighlightJS = (language) => {
                 const libraryLink = document.createElement('script');
                 libraryLink.setAttribute('src', '{% hljs_prefix %}/{% hljs_version %}/highlight.min.js');
@@ -17,8 +17,8 @@
                             { "url": url, "id": language }
                         {% endif %}
                     ];
-                    if (!window.languageLibraries.has(url) && myLanguageLibraries.length) {
-                        window.languageLibraries.add(url);
+                    if (!window.languageLibraries.includes(url) && myLanguageLibraries.length) {
+                        window.languageLibraries.push(url);
                     }
                     const scripts = [];
 
@@ -34,8 +34,8 @@
                                 const src = event.target.getAttribute('src');
                                 loadedLibraries.add(src);
 
-                                console.log(loadedLibraries.size, window.languageLibraries.size);
-                                if (loadedLibraries.size === window.languageLibraries.size) {
+                                console.log(loadedLibraries.size, window.languageLibraries.length);
+                                if (loadedLibraries.size === window.languageLibraries.length) {
                                     console.log('loaded highlight.js...');
                                     hljs.highlightAll();
                                 }
