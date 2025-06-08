@@ -1,55 +1,14 @@
 {% load static wagtail_hljs_tags %}
 {% spaceless %}
     {% load_hljs_theme %}
+    <script src="{% hljs_prefix %}/{% hljs_version %}/highlight.min.js" defer></script>
     <script nonce="{{ request.csp_nonce }}">
-        if (typeof loadHighlightJS !== 'function') {
-            window.loadedLibraries = new Set();
-            window.languageLibraries = [];
-            window.loadHighlightJS = (language) => {
-                const libraryLink = document.createElement('script');
-                libraryLink.setAttribute('src', '{% hljs_prefix %}/{% hljs_version %}/highlight.min.js');
-                libraryLink.addEventListener('load', () => {
-                    const url = "{% hljs_prefix %}/{% hljs_version %}/languages/" + language + ".min.js";
-                    const myLanguageLibraries = [
-                        /*Since there is no html.min.js this check makes sure we
-                        bypass the loading of the script when syntax is set to HTML */
-                        {% if val != "html" %}
-                            { "url": url, "id": language }
-                        {% endif %}
-                    ];
-                    if (!window.languageLibraries.includes(url) && myLanguageLibraries.length) {
-                        window.languageLibraries.push(url);
-                    }
-                    const scripts = [];
-
-                    for (const library of myLanguageLibraries) {
-                        if (!document.getElementById(library["id"])) {
-                            let s = document.createElement("script");
-                            s.id = library["id"];
-                            s.type = "text/javascript";
-                            s.src = library["url"];
-                            s.async = false;
-                            s.addEventListener('load', (event) => {
-                                const src = event.target.getAttribute('src');
-                                loadedLibraries.add(src);
-
-                                if (loadedLibraries.size === window.languageLibraries.length) {
-                                    console.log('loaded highlight.js...');
-                                    hljs.highlightAll();
-                                }
-                            });
-                            scripts.push(s);
-                        }
-                    }
-                    document.head.append(...scripts);
-                });
-                document.head.appendChild(libraryLink);
-            };
-        }
-
-        loadHighlightJS('{{ self.language }}');
-        </script>
-        <pre class="line-numbers">
-            <code class="language-{{ self.language }}">{{ self.code }}</code>
-        </pre>
+        document.addEventListener('DOMContentLoaded', () => {
+            const codeblock = document.currentScript.parentNode.querySelector('code');
+            hljs.highlightElement(codeblock);
+        });
+    </script>
+    <pre class="line-numbers">
+        <code class="language-{{ self.language }}">{{ self.code }}</code>
+    </pre>
 {% endspaceless %}
