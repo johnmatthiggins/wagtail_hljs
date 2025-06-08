@@ -6,13 +6,13 @@
     <script src="{% hljs_prefix %}/{% hljs_version %}/languages/{{ self.language }}.min.js" defer></script>
     {% endif %}
     <script nonce="{{ request.csp_nonce }}">
-    () => {
+    (function(){
         const currentScript = document.currentScript;
         document.addEventListener('DOMContentLoaded', () => {
             const codeblock = currentScript.parentNode.querySelector('code');
             hljs.highlightElement(codeblock);
         });
-    }();
+    })();
     </script>
     <pre class="line-numbers">
         <code class="language-{{ self.language }}">{{ self.code }}</code>
