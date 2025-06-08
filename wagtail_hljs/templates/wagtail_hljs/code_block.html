@@ -1,12 +1,15 @@
 {% load static wagtail_hljs_tags %}
 {% spaceless %}
-    {% load_hljs_theme %}
+{% load_hljs_theme %}
     <script src="{% hljs_prefix %}/{% hljs_version %}/highlight.min.js" defer></script>
+    {% if self.language != "html" %}
+    <script src="{% hljs_prefix %}/{% hljs_version %}/languages/{{ self.language }}.min.js" defer></script>
+    {% endif %}
     <script nonce="{{ request.csp_nonce }}">
-        document.addEventListener('DOMContentLoaded', () => {
-            const codeblock = document.currentScript.parentNode.querySelector('code');
-            hljs.highlightElement(codeblock);
-        });
+    document.addEventListener('DOMContentLoaded', () => {
+        const codeblock = document.currentScript.parentNode.querySelector('code');
+        hljs.highlightElement(codeblock);
+    });
     </script>
     <pre class="line-numbers">
         <code class="language-{{ self.language }}">{{ self.code }}</code>
