@@ -3,9 +3,9 @@
 {% load_hljs_theme %}
     <script src="{% hljs_prefix %}/{% hljs_version %}/highlight.min.js" defer></script>
     {% if self.language != "html" %}
-    <script src="{% hljs_prefix %}/{% hljs_version %}/languages/{{ self.language }}.min.js" defer></script>
+    <script src="{% hljs_prefix %}/{% hljs_version %}/languages/{{ self.language }}.min.js"></script>
     {% endif %}
-    <script nonce="{{ request.csp_nonce }}">
+    <script nonce="{{ request.csp_nonce }}" defer>
     (function(){
         const currentScript = document.currentScript;
         document.addEventListener('DOMContentLoaded', () => {
