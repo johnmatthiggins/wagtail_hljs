@@ -1,9 +1,9 @@
 {% load static wagtail_hljs_tags %}
 {% spaceless %}
 {% load_hljs_theme %}
-    <script src="{% hljs_prefix %}/{% hljs_version %}/highlight.min.js" defer></script>
+    <script src="{% hljs_prefix %}/{% hljs_version %}/highlight.min.js"></script>
     {% if self.language != "html" %}
-    <script src="{% hljs_prefix %}/{% hljs_version %}/languages/{{ self.language }}.min.js"></script>
+    <script src="{% hljs_prefix %}/{% hljs_version %}/languages/{{ self.language }}.min.js" defer></script>
     {% endif %}
     <script nonce="{{ request.csp_nonce }}" defer>
     (function(){
